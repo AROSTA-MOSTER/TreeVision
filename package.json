@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "TreeVision frontend (based on treemaps.app)",
+  "description": "TreeVision frontend - Urban and fruit tree value chain monitoring platform",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

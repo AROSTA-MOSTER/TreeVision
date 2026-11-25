@@ -1,6 +1,16 @@
 # TreeVision Frontend
 
-Standalone frontend for **TreeVision**, adapted from [https://www.treemaps.app/](https://www.treemaps.app/) (`umonkey/treemap` `services/landing`) and packaged with Vite for local development and static builds.
+TreeVision is an integrated digital system for monitoring, managing, and developing the urban and fruit tree value chain in Rwanda.
+
+The platform provides GPS-based tree registration, real-time health and growth monitoring, orchard mapping, advisory services, and analytics to support smallholder farmers, extension officers, and decision-makers.
+
+## Features
+
+- **Urban & Fruit Tree Life Cycle Management:** Track trees from planting and distribution to growth, maintenance, harvest, and sales.
+- **Interactive Mapping:** GPS-based visualization of farms, orchards, and individual trees with filtering by species, location, farmer, and health status.
+- **Analytics & Decision Support:** Actionable insights, yield estimation, and reporting for farmers, cooperatives, and stakeholders.
+- **Value Chain Integration:** Connecting farmers, extension services, private sector actors, and government institutions.
+- **Accessible & Field-Ready:** Built for easy field data collection on mobile devices and comprehensive management on desktop.
 
 ## Quick Start
 
@@ -18,7 +28,14 @@ npm run preview
 
 ## Project Structure
 
-- `index.html`: Rendered landing page markup, styles, SEO metadata, and JSON-LD schema.
-- `public/css/gallery.css`: Carousel and `<dialog>` lightbox styling.
-- `public/js/gallery.js`: Interactive carousel, touch swipe support, and lightbox modal logic.
-- `public/screenshot-*.webp` & `public/screenshot-01-home.png`: App preview screenshots and icons.
+- `index.html`: Main landing page markup, styles, responsive navigation, and sections.
+- `public/css/gallery.css`: Interactive gallery carousel, zoom effects, and lightbox styles.
+- `public/js/gallery.js`: Carousel slider, touch-swipe navigation, and image modal logic.
+- `public/logo.jpg`: TreeVision official brand logo.
+- `public/slide-*.jpg`: High-resolution gallery and system preview slides.
+
+## Contact
+
+- **Website:** [https://www.treevision.tech/](https://www.treevision.tech/)
+- **Email:** nsengiyumvafaustin@treevision.tech
+- **Repository:** [https://github.com/AROSTA-MOSTER/TreeVision](https://github.com/AROSTA-MOSTER/TreeVision)
