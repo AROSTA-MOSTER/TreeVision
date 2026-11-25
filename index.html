@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TreeVision | Open-Source Urban Tree Mapping Software</title>
+    <meta name="description" content="Open-source urban tree mapping software for municipal tree inventory and urban forest inventory. GIS-ready tools for cities, NGOs, and researchers.">
+    <link rel="canonical" href="https://www.treemaps.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TreeVision">
+    <meta property="og:title" content="TreeVision | Open-Source Urban Tree Mapping Software">
+    <meta property="og:description" content="Open-source urban tree mapping software for municipal tree inventory and urban forest inventory. GIS-ready tools for cities, NGOs, and researchers.">
+    <meta property="og:url" content="https://www.treemaps.app/">
+    <meta property="og:image" content="https://www.treemaps.app/screenshot-01-home.png">
+    <meta property="og:image:width" content="1800">
+    <meta property="og:image:height" content="1125">
+    <meta property="og:image:alt" content="TreeVision urban tree mapping dashboard">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TreeVision | Open-Source Urban Tree Mapping Software">
+    <meta name="twitter:description" content="Open-source urban tree mapping software for municipal tree inventory and urban forest inventory. GIS-ready tools for cities, NGOs, and researchers.">
+    <meta name="twitter:image" content="https://www.treemaps.app/screenshot-01-home.png">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="icon" type="image/jpeg" href="/logo.jpg">
+    <link rel="apple-touch-icon" href="/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="/css/gallery.css">
+    <style>
+        :root {
+            --primary: #2d5a27;
+            --primary-hover: #1b4721;
+            --accent-green: #95d237;
+            --header-bg: #1b4721;
+            --card-border: rgba(45, 90, 39, 0.2);
+            --card-bg: var(--pico-card-background-color);
+            --feature-label: #1b1b1b;
+            --feature-text: #303030;
+            --group-label: #000;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        [data-theme="dark"], :root[data-theme="dark"] {
+            --primary: #95d237;
+            --primary-hover: #aceebb;
+            --card-border: rgba(149, 210, 55, 0.3);
+            --feature-label: #e2e2e2;
+            --feature-text: #c6c6c6;
+            --group-label: #fff;
+            --nav-bg: rgba(20, 25, 31, 0.9);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --primary: #95d237;
+                --primary-hover: #aceebb;
+                --card-border: rgba(149, 210, 55, 0.3);
+                --feature-label: #e2e2e2;
+                --feature-text: #c6c6c6;
+                --group-label: #fff;
+                --nav-bg: rgba(20, 25, 31, 0.9);
+            }
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        nav.sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--pico-muted-border-color);
+            padding: 0.5rem 0;
+        }
+
+        nav .brand {
+            font-size: 1.25rem;
+            text-decoration: none;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        nav .brand .brand-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        nav .brand .tree {
+            color: var(--group-label);
+        }
+
+        nav .brand .maps {
+            color: rgb(22, 163, 74);
+        }
+
+        nav ul li a {
+            font-size: 0.9rem;
+            text-decoration: none;
+            color: var(--pico-color);
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .desktop-only {
+            display: inline-block;
+        }
+
+        nav .nav-cta {
+            font-size: 0.85rem !important;
+            padding: 0.4rem 0.8rem !important;
+            margin-left: 1rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem !important;
+            line-height: 1.1 !important;
+            margin-bottom: 1.5rem !important;
+            color: var(--group-label) !important;
+            border-bottom: none !important;
+            display: block !important;
+            margin-top: 0 !important;
+            font-weight: 700 !important;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--feature-text);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: var(--pico-border-radius);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .cta-section {
+            background-color: rgba(45, 90, 39, 0.05);
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: var(--pico-border-radius);
+            margin: 4rem 0;
+            border: 1px solid var(--card-border);
+        }
+
+        #content h2 {
+            color: var(--group-label);
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            border-bottom: none;
+            padding-bottom: 0;
+            display: inline-block;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border: 1px solid var(--card-border);
+            border-radius: var(--pico-border-radius);
+            background: var(--card-bg);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+            background-color: rgba(45, 90, 39, 0.02);
+        }
+
+        .feature-card i {
+            display: block;
+            font-size: 1.5rem;
+            color: rgb(22, 163, 74);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h2 {
+            color: var(--feature-label) !important;
+            margin: 0 0 0.75rem 0 !important;
+            font-size: 1.15rem !important;
+            border-bottom: none !important;
+            padding-bottom: 0 !important;
+            display: block !important;
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--feature-text);
+        }
+
+        .button-cta {
+            background-color: rgb(22, 163, 74) !important;
+            border-color: rgb(22, 163, 74) !important;
+            color: white !important;
+            font-weight: 600;
+        }
+
+        .button-cta:hover {
+            background-color: rgb(21, 128, 61) !important;
+            border-color: rgb(21, 128, 61) !important;
+        }
+
+        .button-outline {
+            color: var(--primary) !important;
+            border-color: var(--primary) !important;
+            background: transparent !important;
+        }
+
+        .button-outline:hover {
+            background-color: rgba(45, 90, 39, 0.1) !important;
+        }
+
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+                padding: 2rem 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem !important;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .desktop-only {
+                display: none;
+            }
+
+            nav.sticky-nav.container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            nav .nav-cta {
+                font-size: 0.75rem !important;
+                padding: 0.3rem 0.6rem !important;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "TreeVision",
+        "url": "https://www.treemaps.app/",
+        "sameAs": ["https://github.com/umonkey/treemap"],
+        "email": "nsengiyumvafaustin@treevision.tech"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "TreeVision",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "url": "https://www.treemaps.app/",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "isAccessibleForFree": true,
+        "sameAs": ["https://github.com/umonkey/treemap"],
+        "description": "Open-source urban tree mapping software for municipal tree inventory and urban forest inventory. GIS-ready tools for cities, NGOs, and researchers."
+      }
+    ]
+    </script>
+    <link rel="preload" as="image" href="/screenshot-01-home.webp" type="image/webp">
+</head>
+<body>
+    <nav class="sticky-nav container">
+        <ul>
+            <li><a href="/" class="brand"><img src="/logo.jpg" alt="TreeVision logo" class="brand-logo" width="38" height="38"><span><span class="tree">Tree</span><span class="maps">Vision</span></span></a></li>
+        </ul>
+        <ul>
+            <li class="desktop-only"><a href="#value-chain">Value Chain</a></li>
+            <li class="desktop-only"><a href="#data-collection">Data Collection</a></li>
+            <li class="desktop-only"><a href="#management-and-analysis">Analytics</a></li>
+            <li class="desktop-only"><a href="#community">Community</a></li>
+            <li><a href="#contact" role="button" class="button-cta nav-cta">Get a Map</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section id="content">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>TreeVision<br/>Urban Tree Mapping</h1>
+                    <p>TreeVision helps cities, NGOs, farmers, and researchers register, monitor, and manage urban and fruit trees across their entire life cycle from planting and growth tracking to harvest, advisory services, and decision-making. Combining high-precision GPS field data collection, interactive mapping, and powerful analytics, the app turns community action into actionable ecological data for a greener, more resilient future.</p>
+                    <div class="hero-buttons">
+                        <a href="https://www.treevision.tech/" role="button" class="button-cta" target="_blank" rel="noopener noreferrer" data-ga-event="demo_click">View Demo</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="gallery" data-delay="4000">
+                        <img src="/slide-01-logo.jpg" alt="TreeVision Smart Forestry &amp; Fruit Tree Intelligence" decoding="async" loading="eager" fetchpriority="high">
+                        <img src="/slide-02-map.jpg" alt="Rwanda Farm Location Map with satellite view and irrigation design" decoding="async" loading="lazy">
+                        <img src="/slide-03-dashboard.jpg" alt="Tree inventory dashboard 30 trees, 96.7% survival rate, species map" decoding="async" loading="lazy">
+                        <img src="/slide-04-mobile.jpg" alt="Mobile and tablet forest management app with Mapbox integration" decoding="async" loading="lazy">
+                        <img src="/slide-05-promo.jpg" alt="TreeVision Greener Cities, A Sustainable Rwanda" decoding="async" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="value-chain">Urban &amp; Fruit Tree Value Chain</h2>
+
+            <p>TreeVision digitizes the full life cycle of urban and fruit trees capturing and managing key information from planting, production, and distribution through to growth, maintenance, fruit production, harvesting, sales, and advisory services. The platform strengthens linkages among farmers, private sector actors, extension service providers, and relevant government institutions.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-seedling"></i>
+                    <h2>Tree Life Cycle Digitalization</h2>
+                    <p>Capture, monitor, and manage key information throughout the urban and fruit tree life cycle from planting, production and distribution to growth, maintenance, fruit production, harvesting, sales, and advisory services.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-link"></i>
+                    <h2>Value Chain Integration</h2>
+                    <p>Digitalize key processes and information flows across the tree value chain, strengthening linkages among farmers, private sector actors, extension service providers, and relevant government institutions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <h2>Training &amp; Onboarding</h2>
+                    <p>Support training and onboarding of relevant users farmers, private sector actors, and government stakeholders to ensure effective adoption and sustainable use of the system.</p>
+                </div>
+            </div>
+
+            <h2 id="data-collection">Data Collection &amp; Management</h2>
+
+            <p>Establish user-friendly mechanisms for collecting, storing, updating, and managing reliable and timely data on urban and fruit trees, farmers, production, harvesting, and marketing. These tools focus on precision mapping, visual documentation, and efficient data handling in any environment.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <h2>Interactive Mapping</h2>
+                    <p>GPS-based visualization of farms or individual trees and planting areas, with filtering and viewing of trees by location, species, farmer, and status including mapping of restoration and agroforestry activities.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-camera"></i>
+                    <h2>Visual Documentation</h2>
+                    <p>Support for photo updates to track health and growth over time.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <h2>Optimized Data Usage</h2>
+                    <p>Support for background photo uploads when on Wi-Fi, preserving battery and mobile data while working in the field.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-bookmark"></i>
+                    <h2>Tree Bookmarks</h2>
+                    <p>Ability to track specific trees of interest for easier follow-up and monitoring.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <h2>Custom Imagery</h2>
+                    <p>Support for custom map tiles, enabling the use of high-resolution internal aerial imagery for precise local mapping.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-street-view"></i>
+                    <h2>Street View Integration</h2>
+                    <p>Support for 360° street-level imagery, including specialized tools to triangulate and verify tree positions directly from the imagery.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <h2>Accessible Technology</h2>
+                    <p>Create accurate maps using standard consumer-grade devices. The platform is designed to produce professional results without requiring expensive surveying equipment.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                    <h2>Efficient Survey Modes</h2>
+                    <p>Choose from various survey modes tailored to your available tools. The platform offers optimized workflows that adapt to your equipment and team size to maximize productivity in the field.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-mobile-button"></i>
+                    <h2>Mobile-First Collection</h2>
+                    <p>Use your existing smartphone to collect all data in the field through a specialized mobile interface, then switch to a laptop for in-depth data analysis and management.</p>
+                </div>
+            </div>
+
+            <h2 id="management-and-analysis">Analytics &amp; Decision Support</h2>
+
+            <p>Integrate data analytics and reporting functionalities to generate actionable information for farmers, value chain actors, and decision-makers supporting improved planning, productivity, transparency, and evidence-based decision-making.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <h2>Powerful Search</h2>
+                    <p>Built-in search functionality to quickly find trees based on species, address, farmer, or any other collected attribute across your entire inventory.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-robot"></i>
+                    <h2>AI &amp; Decision Support</h2>
+                    <p>AI-powered insights and native Model Context Protocol (MCP) support, enabling intelligent agents to perform complex queries, generate advisory reports, and provide deep insights into your tree data.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <h2>Comprehensive Analytics</h2>
+                    <p>Detailed reporting including biodiversity indexing, species leaderboards, harvest statistics, and coverage analytics to support evidence-based planning and transparent reporting to stakeholders.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <h2>OpenStreetMap Integration</h2>
+                    <p>Bidirectional data exchange with OSM, allowing for pulling existing tree data and pushing local updates back to the global map.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                    <h2>Performance</h2>
+                    <p>A Rust-based backend capable of managing large datasets with minimal infrastructure requirements.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-file-export"></i>
+                    <h2>Data Portability</h2>
+                    <p>Export your data in standard GeoJSON format for use in QGIS, ArcGIS, or custom web APIs. Your data remains accessible and compatible with industry-standard GIS tools.</p>
+                </div>
+            </div>
+
+            <h2 id="community">Community</h2>
+
+            <p>TreeVision is built to facilitate collaboration between volunteers, administrators, and the public. These tools help coordinate field work, manage contributions, and engage the wider community in urban forestry efforts.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-comments"></i>
+                    <h2>Communication Tools</h2>
+                    <p>Integrated commenting system to facilitate discussion between team members and administrators about specific trees.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <h2>Citizen Feedback</h2>
+                    <p>Integration with Telegram for reporting remarkable sightings, new plantings, or maintenance needs by volunteers and the public.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <h2>Access Control</h2>
+                    <p>Granular permissions to manage contributions from volunteers and staff, ensuring data integrity while encouraging wide participation.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-users"></i>
+                    <h2>Public Engagement</h2>
+                    <p>A user-friendly public interface that allows citizens to explore their urban forest, learn about local species, and follow greening progress.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <h2>Get TreeVision for Your City or Organization</h2>
+            <p>Deploy the platform for your city, NGO, or government institution and start managing Rwanda's urban and fruit tree value chain digitally.</p>
+            <a href="mailto:nsengiyumvafaustin@treevision.tech" role="button" class="button-cta" data-ga-event="contact_click">nsengiyumvafaustin@treevision.tech</a>
+        </section>
+    </main>
+    <script src="/js/gallery.js" defer></script>
+    <script>
+    document.addEventListener('click', function (event) {
+      var el = event.target.closest('[data-ga-event]');
+      if (!el || typeof gtag !== 'function') return;
+      gtag('event', el.dataset.gaEvent, {
+        link_url: el.href,
+        link_text: (el.textContent || '').trim(),
+        transport_type: 'beacon'
+      });
+    });
+    </script>
+</body>
+</html>
